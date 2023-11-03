@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="./assets/images/manzana.png" type="image/x-icon">
+    <title>Snake Game</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Snake Game</h1>
+        <h2>Rules</h2>
+        <!-- Rules go here -->
+        <h3>Did you know?</h3>
+        <!-- Curiosities go here -->
+        <span id="curio"></span>
+        <!-- Score -->
+        <div class="score"><p>Score:</p><span id="score"></span></div>
+    
+        <div class="button" id="button">
+            <button class="top">Top</button>
+            <button class="bottom">Bottom</button>
+            <button class="left">Left</button>
+            <button class="right">Right</button>
+        </div>
+
+        <!-- Play button goes here, it dissapears when clicked and appears 
+        again when the player losses -->
+        <div class="play">
+            <button class="play" id="play">Play</button>
+        </div>
+
+        <!-- Game board goes here -->
+        <div class="board"></div>
+
+
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
