@@ -12,6 +12,8 @@ let curio = document.getElementById('curio')
 let play = document.getElementById('play')
 //The board
 let board = document.getElementById('board')
+//The score
+let score = document.getElementById('score')
 
 //Functions
 
@@ -21,7 +23,46 @@ const loadTrivia = () =>{
     curio.textContent = curiosities[pos]
 }
 
+//the divs load into the board
+const makeBoard = () =>{
+    for (let index = 0; index < 90; index++) {
+        let div = document.createElement("div")
+        div.className ="board div"
+        board.append(div)
+        
+    }
+}
+
+const applePosition = (boardSquares) =>{
+    //the apple gets added into the board
+    appleAdd = Math.floor(Math.random() * boardSquares.length)
+
+    boardSquares[appleAdd].classList.add('apple')
+}
+
+const playBoard = () =>{
+    //all the squares get selected
+    let boardSquares = document.querySelectorAll(".board div")
+    //the apple gets made with the squares
+    applePosition(boardSquares)
+    //score
+    score.textContent = 0
+    //the snake appears
+    snake = [2 , 1 , 0]
+    //the snale gets added into the board
+    snake.forEach(index => {
+        boardSquares[index].classList.add("snake")
+    }); 
+}
+
+//the button is pressed and it loads the game
+const startGame = () =>{
+    play.style.display = "none"
+    makeBoard()
+    playBoard()
+}
 
 
 //Listeners
 document.addEventListener("DOMContentLoaded",loadTrivia)
+play.addEventListener("click",startGame)
