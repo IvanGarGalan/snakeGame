@@ -29,9 +29,22 @@ body{
 *   In order to make the snake move
 *   we use this css class    
 */
-.grid div {
+.div{
     width: 20px;
     height: 20px;
-    /*border:1px black solid;
-  box-sizing:border-box*/
+    border:1px black solid;
+    box-sizing: border-box;
+}
+
+/* The apple class */
+.apple{
+    background-image: url(../assets/images/manzana.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-color: grey; */
+
+}
+/* The snake class */
+.snake{
+    background-color: greenyellow;
 }
