@@ -56,6 +56,22 @@ const playBoard = () =>{
     snake.forEach(index => {
         boardSquares[index].classList.add("snake")
     }); 
+    //the snake moves in the board
+    intervalSnake = setInterval(checkSnake)
+}
+//this function moves the snake 
+const checkSnake = () =>{
+    let boardSquares = document.querySelectorAll(".board div")
+    //this checks if the snake hits the board or itself
+    if (getHit(boardSquares)) {
+        play.style.display = "flex"
+    } else {
+        moveSnake(boardSquares)
+    }
+}
+
+const moveSnake = (boardSquares) =>{
+    
 }
 
 //the button is pressed and it loads the game
