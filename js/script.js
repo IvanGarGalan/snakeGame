@@ -17,6 +17,8 @@ let play = document.getElementById('play')
 let board = document.getElementById('board')
 //The score
 let score = document.getElementById('score')
+//The initial Snake
+let snake = []
 
 //Functions
 
@@ -71,7 +73,15 @@ const checkSnake = () =>{
 }
 
 const moveSnake = (boardSquares) =>{
-    
+    //we get the snakes tail
+    let tailSnake = snake.pop()
+    //remove the class from the last div and add it into the first div
+    boardSquares[tailSnake].classList.remove("snake")
+    snake.unshift(snake[0])
+    // movement ends here
+    //the snake eats the apple
+    eatApple(boardSquares,tailSnake)
+    boardSquares[snake[0]].classList.add("snake")
 }
 
 //the button is pressed and it loads the game
