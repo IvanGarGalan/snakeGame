@@ -134,27 +134,27 @@ const eatApple = (boardSquares,tailSnake) =>{
 }
 
 const move = (event) =>{
-    let direction = event.target.className;
+    let newDirection = event.target.className;
  
 
     //this switch case looks which button has been pressed in order to move the snake
     switch (direction) {
         case "top":
-            console.log('up')
+            // console.log('up');
+            direction = -width;
             break;
-    
         case "bottom":
-            console.log('down')
+            // console.log('down');
+            direction = width;
             break;
-
         case "left":
-            console.log('left')
-        break;
-
+            // console.log('left');
+            direction = -1;
+            break;
         case "right":
-            console.log('right')
-        break;
-
+            // console.log('right');
+            direction = 1;
+            break
     }
 }
 
