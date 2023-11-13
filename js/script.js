@@ -97,7 +97,7 @@ const getHit = (boardSquares) =>{
         (snake[0] % width === width - 1 && direction === 1) ||
         (snake[0] % width === 0 && direction === -1) ||
         (snake[0] - width <= 0 && direction === -width) ||
-        boardSquares[currentSnake[0] + direction].classList.contains("snake")
+        boardSquares[snake[0] + direction].classList.contains("snake")
       ) {
         return true;
       } else {
@@ -121,6 +121,31 @@ const eatApple = (boardSquares,tailSnake) =>{
     }
 }
 
+const move = (event) =>{
+    let direction = event.target.className;
+ 
+
+    //this switch case looks which button has been pressed in order to move the snake
+    switch (direction) {
+        case "top":
+            console.log('up')
+            break;
+    
+        case "bottom":
+            console.log('down')
+            break;
+
+        case "left":
+            console.log('left')
+        break;
+
+        case "right":
+            console.log('right')
+        break;
+
+    }
+}
+
 //the button is pressed and it loads the game
 const startGame = () =>{
     play.style.display = "none"
@@ -130,5 +155,12 @@ const startGame = () =>{
 
 
 //Listeners
+
+//this for adds the move function to each of the buutons
+for (let i = 0; i < button.length; i++) {
+    button[i].addEventListener("click", move);
+}
+
+
 document.addEventListener("DOMContentLoaded",loadTrivia)
 play.addEventListener("click",startGame)
