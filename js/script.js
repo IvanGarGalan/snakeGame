@@ -1,10 +1,10 @@
 //For the curiosities,to be implemented later
 curiosities = [
     'Snakes cant eat fruit in real life',
-    'Apples can help you clean your teeth',
+    'Apples can help you with your teeth',
     'Apples originate from Asia',
     'Apples can be perseved for months',
-    'Scientists believe there are between 5000 and 20000 varieties of apples'
+    'Apples are very rich in minerals'
 ];
 
 //the buttons that move the snake
