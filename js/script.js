@@ -38,7 +38,7 @@ const makeBoard = () =>{
     for (let index = 0; index < 90; index++) {
         let div = document.createElement("div")
         div.className ="board div"
-        board.append(div)
+        board.appendChild(div)
         
     }
 }
@@ -79,15 +79,20 @@ const checkSnake = () =>{
 }
 
 const moveSnake = (boardSquares) =>{
-    //we get the snakes tail
-    let tailSnake = snake.pop()
-    //remove the class from the last div and add it into the first div
-    boardSquares[tailSnake].classList.remove("snake")
-    snake.unshift(snake[0])
+     //we get the snakes tail
+    let tailSnake = snake.pop();
+    // the new head gets added based on the direction
+    let newHead = snake[0] + direction;
+    //the head visually appears
+    boardSquares[tailSnake].classList.remove("snake");
+    boardSquares[newHead].classList.add("snake");
+    
+    snake.unshift(newHead);
     // movement ends here
     //the snake eats the apple
-    eatApple(boardSquares,tailSnake)
-    boardSquares[snake[0]].classList.add("snake")
+    eatApple(boardSquares, tailSnake);
+
+
 }
 
 const getHit = (boardSquares) =>{
