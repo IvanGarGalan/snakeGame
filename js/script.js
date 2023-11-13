@@ -18,8 +18,13 @@ let board = document.getElementById('board')
 //The score
 let score = document.getElementById('score')
 //The initial Snake
-let snake = []
-
+let snake = [2,1,0]
+// The width of the snake
+let width = 10
+// The score
+let points = 0
+//The direction the snake moves
+let direction = 1
 //Functions
 
 //this function loads trivia from the array
@@ -51,7 +56,8 @@ const playBoard = () =>{
     //the apple gets made with the squares
     applePosition(boardSquares)
     //score
-    score.textContent = 0
+    points = 0
+    score.textContent = points
     //the snake appears
     snake = [2 , 1 , 0]
     //the snale gets added into the board
@@ -82,6 +88,37 @@ const moveSnake = (boardSquares) =>{
     //the snake eats the apple
     eatApple(boardSquares,tailSnake)
     boardSquares[snake[0]].classList.add("snake")
+}
+
+const getHit = (boardSquares) =>{
+    // if the snake gets hit with one of the walls or itself, returns true
+    if (
+        (snake[0] + width >= width * width && direction === width) ||
+        (snake[0] % width === width - 1 && direction === 1) ||
+        (snake[0] % width === 0 && direction === -1) ||
+        (snake[0] - width <= 0 && direction === -width) ||
+        boardSquares[currentSnake[0] + direction].classList.contains("snake")
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+
+}
+
+
+const eatApple = (boardSquares,tailSnake) =>{
+    //
+    if (boardSquares[snake[0]].classList.contains("apple")) {
+        boardSquares[snake[0]].classList.remove("apple");
+        boardSquares[tailSnake].classList.add("snake");
+        snake.push(tailSnake);
+        applePosition(boardSquares)
+        points++;
+        scoreDisplay.textContent = points;
+        //
+        
+    }
 }
 
 //the button is pressed and it loads the game
