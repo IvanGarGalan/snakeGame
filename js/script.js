@@ -37,7 +37,7 @@ const loadTrivia = () =>{
 
 //the divs load into the board
 const makeBoard = () =>{
-    for (let index = 0; index < 90; index++) {
+    for (let index = 0; index < 81; index++) {
         let div = document.createElement("div")
         div.className ="board div"
         board.appendChild(div)
