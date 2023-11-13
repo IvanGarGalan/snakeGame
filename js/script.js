@@ -18,7 +18,7 @@ let board = document.getElementById('board')
 //The score
 let score = document.getElementById('score')
 //The initial Snake
-let snake = [2,1,0]
+let snake = []
 // The width of the snake
 let width = 10
 // The score
@@ -51,15 +51,22 @@ const applePosition = (boardSquares) =>{
 }
 
 const playBoard = () =>{
+    //if the board already exists, it erases it and makes it again
+    while (board.firstChild) {
+        board.removeChild(board.firstChild);
+    }
+    makeBoard();
     //all the squares get selected
     let boardSquares = document.querySelectorAll(".board div")
+
+
     //the apple gets made with the squares
     applePosition(boardSquares)
     //score
     points = 0
     score.textContent = points
-    //the snake appears
-    snake = [2 , 1 , 0]
+    //the snake appears,it apperas based on the board in the center
+    snake = [Math.floor(width / 2) + width, Math.floor(width / 2) + width - 1, Math.floor(width / 2) + width - 2];
     //the snale gets added into the board
     snake.forEach(index => {
         boardSquares[index].classList.add("snake")
@@ -87,7 +94,7 @@ const moveSnake = (boardSquares) =>{
     boardSquares[tailSnake].classList.remove("snake");
     boardSquares[newHead].classList.add("snake");
     
-    snake.unshift(newHead);
+    snake[0] = newHead;
     // movement ends here
     //the snake eats the apple
     eatApple(boardSquares, tailSnake);
