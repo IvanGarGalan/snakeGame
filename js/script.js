@@ -71,8 +71,8 @@ const playBoard = () =>{
     snake.forEach(index => {
         boardSquares[index].classList.add("snake")
     }); 
-    //the snake moves in the board
-    intervalSnake = setInterval(checkSnake)
+    //the snake moves in the board at 4 ms each
+    intervalSnake = setInterval(checkSnake,4)
 }
 //this function moves the snake 
 const checkSnake = () =>{
