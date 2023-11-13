@@ -18,13 +18,15 @@ let board = document.getElementById('board')
 //The score
 let score = document.getElementById('score')
 //The initial Snake
-let snake = []
+let snake = [2,1,0]
 // The width of the snake
-let width = 10
+let width = 9
 // The score
 let points = 0
 //The direction the snake moves
 let direction = 1
+//interval snake
+let intervalSnake
 //Functions
 
 //this function loads trivia from the array
@@ -62,42 +64,43 @@ const playBoard = () =>{
 
     //the apple gets made with the squares
     applePosition(boardSquares)
+    //the direction gets set
+    direction = 1
     //score
     points = 0
     score.textContent = points
     //the snake appears,it apperas based on the board in the center
-    snake = [Math.floor(width / 2) + width, Math.floor(width / 2) + width - 1, Math.floor(width / 2) + width - 2];
+    const startPosition = Math.floor(Math.random() * (width * (width - 2)) + width);
+    snake = [startPosition, startPosition - 1, startPosition - 2];
     //the snale gets added into the board
     snake.forEach(index => {
         boardSquares[index].classList.add("snake")
     }); 
-    //the snake moves in the board at 4 ms each
-    intervalSnake = setInterval(checkSnake,4)
+    //the snake moves
+  intervalSnake = setInterval(() => {
+      checkSnake(boardSquares);
+  }, 1000);
 }
+
 //this function moves the snake 
 const checkSnake = () =>{
     let boardSquares = document.querySelectorAll(".board div")
     //this checks if the snake hits the board or itself
     if (getHit(boardSquares)) {
         play.style.display = "flex"
+        clearInterval(intervalSnake);
     } else {
         moveSnake(boardSquares)
     }
 }
 
 const moveSnake = (boardSquares) =>{
-     //we get the snakes tail
-    let tailSnake = snake.pop();
-    // the new head gets added based on the direction
-    let newHead = snake[0] + direction;
-    //the head visually appears
-    boardSquares[tailSnake].classList.remove("snake");
-    boardSquares[newHead].classList.add("snake");
-    
-    snake[0] = newHead;
+    let tail = snake.pop();
+    boardSquares[tail].classList.remove("snake");
+    snake.unshift(snake[0] + direction);
     // movement ends here
-    //the snake eats the apple
-    eatApple(boardSquares, tailSnake);
+    eatApple(boardSquares, tail);
+    boardSquares[snake[0]].classList.add("snake");
 
 
 }
@@ -108,15 +111,14 @@ const getHit = (boardSquares) =>{
         (snake[0] + width >= width * width && direction === width) ||
         (snake[0] % width === width - 1 && direction === 1) ||
         (snake[0] % width === 0 && direction === -1) ||
-        (snake[0] - width <= 0 && direction === -width) ||
+        (snake[0] - width < 0 && direction === -width) ||
         boardSquares[snake[0] + direction].classList.contains("snake")
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-
-}
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 const eatApple = (boardSquares,tailSnake) =>{
@@ -127,34 +129,36 @@ const eatApple = (boardSquares,tailSnake) =>{
         snake.push(tailSnake);
         applePosition(boardSquares)
         points++;
-        scoreDisplay.textContent = points;
+        score.textContent = points;
         //
         
     }
 }
 
 const move = (event) =>{
-    let newDirection = event.target.className;
- 
-
     //this switch case looks which button has been pressed in order to move the snake
-    switch (direction) {
+    switch (event.target.className) {
+        // the if statements are here so the snke doesnt move diagonaly
         case "top":
-            // console.log('up');
-            direction = -width;
+            if (direction !== width) { 
+                direction = -width;
+            }
             break;
         case "bottom":
-            // console.log('down');
-            direction = width;
+            if (direction !== -width) { 
+                direction = +width;
+            }
             break;
         case "left":
-            // console.log('left');
-            direction = -1;
+            if (direction !== 1) { 
+                direction = -1;
+            }
             break;
         case "right":
-            // console.log('right');
-            direction = 1;
-            break
+            if (direction !== -1) { 
+                direction = 1;
+            }
+            break;
     }
 }
 
